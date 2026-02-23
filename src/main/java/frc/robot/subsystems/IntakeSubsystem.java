@@ -28,7 +28,17 @@ public class IntakeSubsystem extends SubsystemBase {
   // declare configuration
   private SparkMaxConfig intakeConfig = new SparkMaxConfig();
   
-  public IntakeSubsystem() {}
+  public IntakeSubsystem() {
+
+    //Configure motor controllers inside the constructor
+        
+    intakeConfig  
+      .inverted(IntakeConstants.kInverted)  
+      .smartCurrentLimit(IntakeConstants.kCurrentLimit)
+      .openLoopRampRate(DriveConstants.kRampRate)
+      .voltageCompensation(DriveConstants.kVoltCompensation)
+      .idleMode(IdleMode.kBrake);
+  }
 
   @Override
   public void periodic() {

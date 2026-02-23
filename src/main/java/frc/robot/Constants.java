@@ -34,9 +34,17 @@ public final class Constants {
   
   public static final class IntakeConstants {
 
-    //intake motor controller
+    //intake CANID
      public static final int kIntakeCANID = 8;
     
+    //Intake motor controller configurations
+    public static final int kCurrentLimit = 40;
+    public static final double kRampRate = 0.2;
+    public static final double kVoltCompensation = 12.0;
+
+    //Intake Motor inversion
+    public static final boolean kInverted = false;
+
   }
 
   public static final class OperatorConstants {
