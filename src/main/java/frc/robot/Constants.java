@@ -31,6 +31,13 @@ public final class Constants {
     public static final boolean kLeftInverted = false;
     public static final boolean kRightInverted = true;
   }
+  
+  public static final class IntakeConstants {
+
+    //intake motor controller
+     public static final int kIntakeCANID = 8;
+    
+  }
 
   public static final class OperatorConstants {
 
