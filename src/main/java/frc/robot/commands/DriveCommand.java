@@ -31,8 +31,8 @@ public class DriveCommand extends Command {
         SmartDashboard.putString("Drive Type ", "Select");
 
         // objects that set the options for drive mode
-        driveChooser.setDefaultOption("Tank Drive", "Tank Drive");
-        driveChooser.addOption("Arcade Drive", "Arcade Drive");
+        driveChooser.setDefaultOption("Arcade Drive", "Arcade Drive");
+        driveChooser.addOption("Tank Drive", "Tank Drive");
 
         // maps the Drive Mode key to the sendable DriveChooser variable
         SmartDashboard.putData("Drive Mode", driveChooser);
@@ -48,20 +48,22 @@ public class DriveCommand extends Command {
     public void execute() {
         double scale = m_drive.getDriveScale(); // get drive scale from SmartDashboard
         
-        // Tank drive
+         // Arcade drive
+        double turnPower = MathUtil.applyDeadband(m_controller.getRightX(), OperatorConstants.kDeadband) * scale;
+
+
+        // Optional: Tank drive
         double leftPower = -MathUtil.applyDeadband(m_controller.getLeftY(), OperatorConstants.kDeadband) * scale;
         double rightPower = -MathUtil.applyDeadband(m_controller.getRightY(), OperatorConstants.kDeadband) * scale;
 
-        // Optional: arcade drive
-        double turnPower = MathUtil.applyDeadband(m_controller.getRightX(), OperatorConstants.kDeadband) * scale;
-
+       
         String driveMode = driveChooser.getSelected();
-        if (driveMode == null) driveMode = "Tank Drive";
+        if (driveMode == null) driveMode = "Arcade Drive";
 
         if (driveMode.equals("Tank Drive")) {
-            m_drive.setTankPower(leftPower, rightPower);
-            } else {
             m_drive.setArcadePower(leftPower, turnPower);
+            } else {
+            m_drive.setTankPower(leftPower, rightPower);
             }
     }
 
