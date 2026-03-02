@@ -14,6 +14,7 @@ package frc.robot;
  */
 public final class Constants {
  
+  
   public static final class DriveConstants {
  
     //drivetrain CANIDs
@@ -32,19 +33,19 @@ public final class Constants {
     public static final boolean kRightInverted = true;
   }
   
-  public static final class IntakeConstants {
+  public static final class SnowPlowConstants {
 
-    //intake CANID
+    //Snow plow mechanism CANIDs
     public static final int kFeederRollerCANID = 8;
     public static final int kIntakeLauncherCANID = 9;
     
-    //Intake motor controller configurations
+    //Snow plow mechanism motor controller configurations
     public static final int kCurrentLimit = 40;
     public static final double kRampRate = 0.7;
     public static final double kVoltCompensation = 12.0;
     public static final double kIntakeSpeed = 0.75;
 
-    //Intake Motor inversion
+    //Snow plow mechanism Motor inversion
     public static final boolean kFeederInverted = false;
     public static final boolean kLauncherInverted = true;
 

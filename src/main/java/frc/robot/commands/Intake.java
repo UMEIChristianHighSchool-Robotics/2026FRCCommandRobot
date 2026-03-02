@@ -6,7 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.CANFuelSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 import static frc.robot.Constants.IntakeConstants;
 
@@ -14,12 +14,12 @@ import static frc.robot.Constants.IntakeConstants;
 public class Intake extends Command {
   /** Creates a new Intake. */
 
-  CANFuelSubsystem IntakeSubsystem;
+  IntakeSubsystem intakeSubsystem;
 
-  public Intake(CANFuelSubsystem IntakeSubsystem) {
+  public Intake(IntakeSubsystem intakeSystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(IntakeSubsystem);
-    this.IntakeSubsystem = intakeSystem;
+    addRequirements(intakeSystem);
+    this.intakeSubsystem = intakeSystem;
   }
 
    // Called when the command is initially scheduled. Set the rollers to the
