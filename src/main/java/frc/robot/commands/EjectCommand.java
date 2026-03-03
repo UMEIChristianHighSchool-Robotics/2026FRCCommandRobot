@@ -6,30 +6,27 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.CANFuelSubsystem;
+import frc.robot.subsystems.SnowPlowSubsystem;
+import static frc.robot.Constants.SnowPlowConstants;
 
-import static frc.robot.Constants.IntakeConstants;
+public class EjectCommand extends Command {
+ 
+  SnowPlowSubsystem m_intake;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class Eject extends Command {
-  /** Creates a new Intake. */
-
-  CANFuelSubsystem IntakeSubsystem;
-
-  public Eject(CANFuelSubsystem IntakeSubsystem) {
-    addRequirements(IntakeSubsystem;
-    this.IntakeSubsystem = intakeSystem;
+  public EjectCommand(SnowPlowSubsystem intake) {
+    addRequirements(intake);
+    this.m_intake = intake;
   }
 
   // Called when the command is initially scheduled. Set the rollers to the
   // appropriate values for ejecting
   @Override
   public void initialize() {
-    IntakeSubsystem
+    m_intake
         .setIntakeLauncherRoller(
-            -1 * SmartDashboard.getNumber("Intaking intake roller value", INTAKING_INTAKE_VOLTAGE));
-    IntakeSubsystem
-        .setFeederRoller(-1 * SmartDashboard.getNumber("Intaking feeder roller value", INTAKING_FEEDER_VOLTAGE));
+            -1 * SmartDashboard.getNumber("Intaking intake roller value", SnowPlowConstants.kIntakingIntakeVoltage));
+    m_intake
+        .setFeederRoller(-1 * SmartDashboard.getNumber("Intaking feeder roller value", SnowPlowConstants.kIntakingFeederVoltage));
   }
 
   // Called every time the scheduler runs while the command is scheduled. This
@@ -41,8 +38,8 @@ public class Eject extends Command {
   // Called once the command ends or is interrupted. Stop the rollers
   @Override
   public void end(boolean interrupted) {
-    IntakeSubsystem.setIntakeLauncherRoller(0);
-    IntakeSubsystem.setFeederRoller(0);
+    m_intake.setIntakeLauncherRoller(0);
+    m_intake.setFeederRoller(0);
   }
 
   // Returns true when the command should end.

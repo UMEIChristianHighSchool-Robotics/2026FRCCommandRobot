@@ -4,63 +4,61 @@
 
 package frc.robot.subsystems;
 
-import java.util.function.DoubleSupplier;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.IntakeConstants;
+//import java.util.function.DoubleSupplier;
 
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
-import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import com.revrobotics.spark.config.SparkMaxConfig;
+//import com.revrobotics.spark.SparkLowLevel;
 
-import static frc.robot.Constants.IntakeConstants;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+//import edu.wpi.first.wpilibj2.command.Command;
+
+import static frc.robot.Constants.SnowPlowConstants;
 
 
-public class IntakeSubsystem extends SubsystemBase {
-  /** Creates a new IntakeSubsystem. */
+public class SnowPlowSubsystem extends SubsystemBase {
   
-  //Declare and initialize the motor controller
-  private SparkMax feederRoller = new SparkMax(IntakeConstants.kFeederRollerCANID, MotorType.kBrushless);
-  private SparkMax intakeLauncherRoller = new SparkMax(IntakeConstants.kIntakeLauncherCANID, MotorType.kBrushless);
+  //Declare and initialize the motor controllers
+  private SparkMax feederRoller = new SparkMax(SnowPlowConstants.kFeederRollerCANID, MotorType.kBrushless);
+  private SparkMax intakeLauncherRoller = new SparkMax(SnowPlowConstants.kIntakeLauncherCANID, MotorType.kBrushless);
   
   // declare configuration
   private SparkMaxConfig feederRollerConfig = new SparkMaxConfig();
   private SparkMaxConfig intakeLauncherConfig = new SparkMaxConfig();
   
 
-  public IntakeSubsystem() {
+  public SnowPlowSubsystem() {
 
     //Configure motor controllers inside the constructor
         
     feederRollerConfig  
-      .inverted(IntakeConstants.kFeederInverted)  
-      .smartCurrentLimit(IntakeConstants.kCurrentLimit)
-      .openLoopRampRate(IntakeConstants.kRampRate)
-      .voltageCompensation(IntakeConstants.kVoltCompensation)
+      .inverted(SnowPlowConstants.kFeederInverted)  
+      .smartCurrentLimit(SnowPlowConstants.kFeederCurrentLimit)
+      .openLoopRampRate(SnowPlowConstants.kRampRate)
+      .voltageCompensation(SnowPlowConstants.kVoltCompensation)
       .idleMode(IdleMode.kBrake);
   
     feederRoller.configure(feederRollerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     
     intakeLauncherConfig 
-      .inverted(IntakeConstants.kLauncherInverted)  
-      .smartCurrentLimit(IntakeConstants.kCurrentLimit)
-      .openLoopRampRate(IntakeConstants.kRampRate)
-      .voltageCompensation(IntakeConstants.kVoltCompensation)
+      .inverted(SnowPlowConstants.kLauncherInverted)  
+      .smartCurrentLimit(SnowPlowConstants.kLauncherCurrentLimit)
+      .openLoopRampRate(SnowPlowConstants.kRampRate)
+      .voltageCompensation(SnowPlowConstants.kVoltCompensation)
       .idleMode(IdleMode.kBrake);
   
     intakeLauncherRoller.configure(intakeLauncherConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   
-    SmartDashboard.putNumber("Intaking feeder roller value", INTAKING_FEEDER_VOLTAGE);
-    SmartDashboard.putNumber("Intaking intake roller value", INTAKING_INTAKE_VOLTAGE);
-    SmartDashboard.putNumber("Launching feeder roller value", LAUNCHING_FEEDER_VOLTAGE);
-    SmartDashboard.putNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE);
-    SmartDashboard.putNumber("Spin-up feeder roller value", SPIN_UP_FEEDER_VOLTAGE);
+    SmartDashboard.putNumber("Intaking feeder roller value", SnowPlowConstants.kIntakingFeederVoltage);
+    SmartDashboard.putNumber("Intaking intake roller value", SnowPlowConstants.kIntakingIntakeVoltage);
+    SmartDashboard.putNumber("Launching feeder roller value", SnowPlowConstants.kLaunchingFeederVoltage);
+    SmartDashboard.putNumber("Launching launcher roller value", SnowPlowConstants.kLaunchingLauncherVoltage);
+    SmartDashboard.putNumber("Spin-up feeder roller value", SnowPlowConstants.kSpinUpFeederVoltage);
   }
   
  // A method to set the voltage of the intake roller

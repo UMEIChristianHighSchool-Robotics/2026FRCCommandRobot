@@ -22,9 +22,10 @@ public class DriveCommand extends Command {
     SendableChooser<String> driveChooser = new SendableChooser<String>();
 
      public DriveCommand(DiffDriveSubsystem drive, CommandXboxController controller) {
+        addRequirements(drive);
         m_drive = drive;
         m_controller = controller;
-        addRequirements(m_drive);
+        
 
 
         // label for SmartDashboard
@@ -49,7 +50,7 @@ public class DriveCommand extends Command {
         double scale = m_drive.getDriveScale(); // get drive scale from SmartDashboard
         
          // Arcade drive
-        double turnPower = MathUtil.applyDeadband(m_controller.getRightX(), OperatorConstants.kDeadband) * scale;
+        double turnPower = MathUtil.applyDeadband(m_controller.getLeftX(), OperatorConstants.kDeadband) * scale;
 
 
         // Optional: Tank drive
@@ -60,7 +61,7 @@ public class DriveCommand extends Command {
         String driveMode = driveChooser.getSelected();
         if (driveMode == null) driveMode = "Arcade Drive";
 
-        if (driveMode.equals("Tank Drive")) {
+        if (driveMode.equals("Arcade Drive")) {
             m_drive.setArcadePower(leftPower, turnPower);
             } else {
             m_drive.setTankPower(leftPower, rightPower);

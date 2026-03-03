@@ -40,10 +40,22 @@ public final class Constants {
     public static final int kIntakeLauncherCANID = 9;
     
     //Snow plow mechanism motor controller configurations
-    public static final int kCurrentLimit = 40;
+
+    public static final int kFeederCurrentLimit = 40;
+    public static final int kLauncherCurrentLimit = 40;
     public static final double kRampRate = 0.7;
     public static final double kVoltCompensation = 12.0;
     public static final double kIntakeSpeed = 0.75;
+
+    // Voltage values for various snow plow operations. These values may need to be tuned
+    // based on exact robot construction.
+    // See the Software Guide for tuning information
+    public static final double kIntakingFeederVoltage = -12;
+    public static final double kIntakingIntakeVoltage = 10;
+    public static final double kLaunchingFeederVoltage = 9;
+    public static final double kLaunchingLauncherVoltage = 10.6;
+    public static final double kSpinUpFeederVoltage = -6;
+    public static final double kSpinUpSeconds = 1;
 
     //Snow plow mechanism Motor inversion
     public static final boolean kFeederInverted = false;
@@ -65,7 +77,12 @@ public final class Constants {
 
     //Speed and deadband
     public static final double kDriveSpeedScale = 0.8;
+    public static final double kRotationScale = 0.8;
     public static final double kDeadband = 0.05;
+
+    //auto drive
+    public static final double kxSpeed = 0.5;
+    public static final double kzRotation = 0.0;
   }
 
 }

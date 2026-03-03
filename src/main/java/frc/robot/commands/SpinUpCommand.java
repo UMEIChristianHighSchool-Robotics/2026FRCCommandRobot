@@ -6,28 +6,28 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.CANFuelSubsystem;
+import frc.robot.subsystems.SnowPlowSubsystem;
+
 import static frc.robot.Constants.SnowPlowConstants;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class Launch extends Command {
-  /** Creates a new Intake. */
+public class SpinUpCommand extends Command {
+ 
+  SnowPlowSubsystem m_intake;
 
-  CANFuelSubsystem IntakeSubsystem;
-
-  public Launch(CANFuelSubsystem intakeSystem) {
-    addRequirements(intakeSystem);
-    this.IntakeSubsystem = intakeSystem;
+  public SpinUpCommand(SnowPlowSubsystem intake) {
+    addRequirements(intake);
+    this.m_intake = intake;
   }
 
   // Called when the command is initially scheduled. Set the rollers to the
   // appropriate values for intaking
   @Override
   public void initialize() {
-    IntakeSubsystem
+    m_intake
         .setIntakeLauncherRoller(
-            SmartDashboard.getNumber("Launching launcher roller value", LAUNCHING_LAUNCHER_VOLTAGE));
-    IntakeSubsystem.setFeederRoller(SmartDashboard.getNumber("Launching feeder roller value", LAUNCHING_FEEDER_VOLTAGE));
+            SmartDashboard.getNumber("Launching launcher roller value", SnowPlowConstants.kLaunchingLauncherVoltage));
+    m_intake.setFeederRoller(SmartDashboard.getNumber("Launching spin-up feeder value", SnowPlowConstants.kSpinUpFeederVoltage));
   }
 
   // Called every time the scheduler runs while the command is scheduled. This

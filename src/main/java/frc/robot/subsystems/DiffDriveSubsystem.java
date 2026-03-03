@@ -4,7 +4,7 @@ import java.util.function.DoubleSupplier;
 
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
-import com.revrobotics.spark.SparkLowLevel;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
@@ -22,10 +22,10 @@ import static frc.robot.Constants.DriveConstants;
 public class DiffDriveSubsystem extends SubsystemBase {
 
   //Declare and initialize the motor controllers
-  private SparkMax leftLeader = new SparkMax(DriveConstants.kLeftLeaderCANID, SparkLowLevel.MotorType.kBrushless);
-  private SparkMax leftFollower = new SparkMax(DriveConstants.kLeftFollowerCANID, SparkLowLevel.MotorType.kBrushless);
-  private SparkMax rightLeader = new SparkMax(DriveConstants.kRightLeaderCANID, SparkLowLevel.MotorType.kBrushless);
-  private SparkMax rightFollower = new SparkMax(DriveConstants.kRightFollowerCANID, SparkLowLevel.MotorType.kBrushless);
+  private SparkMax leftLeader = new SparkMax(DriveConstants.kLeftLeaderCANID, MotorType.kBrushless);
+  private SparkMax leftFollower = new SparkMax(DriveConstants.kLeftFollowerCANID, MotorType.kBrushless);
+  private SparkMax rightLeader = new SparkMax(DriveConstants.kRightLeaderCANID, MotorType.kBrushless);
+  private SparkMax rightFollower = new SparkMax(DriveConstants.kRightFollowerCANID, MotorType.kBrushless);
  
 // declare configurations
   private SparkMaxConfig leftLeaderConfig = new SparkMaxConfig();
@@ -49,7 +49,7 @@ public class DiffDriveSubsystem extends SubsystemBase {
       .openLoopRampRate(DriveConstants.kRampRate)
       .voltageCompensation(DriveConstants.kVoltCompensation)
       .idleMode(IdleMode.kBrake);
-  
+      
     rightLeaderConfig
       .inverted(DriveConstants.kRightInverted)
       .smartCurrentLimit(DriveConstants.kCurrentLimit)
@@ -106,11 +106,11 @@ public void setTankPower(double left, double right) {
     m_drive.tankDrive(left, right);
 }
 /** Sets speed and rotation for arcade drive */
-public void setArcadePower(double speed, double rotation) {
-    m_drive.arcadeDrive(speed, rotation);
+public void setArcadePower(double xSpeed, double zRotation) {
+    m_drive.arcadeDrive(xSpeed, zRotation);
 }
 
- public Command tankDrive(DoubleSupplier left, DoubleSupplier right) {
+ public Command DriveCommand(DoubleSupplier left, DoubleSupplier right) {
   return run(() -> {
     double scale = driveScaleChooser.getSelected();
 
